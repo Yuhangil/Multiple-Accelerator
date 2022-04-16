@@ -115,7 +115,7 @@ module DataMover
         endcase
     end
     
-    assign o_idle = (c_state_read == S_IDLE) == (c_state_write == S_IDLE);
+    assign o_idle = (c_state_read == S_IDLE) && (c_state_write == S_IDLE);
     assign o_read = (c_state_read == S_RUN);
     assign o_write = (c_state_write == S_RUN);
     assign o_done = (c_state_write == S_DONE);
@@ -161,7 +161,7 @@ module DataMover
     assign addr_b0 = addr_cnt_read;
     assign ce_b0 = o_read;
     assign we_b0 = 1'b0;
-    assign d_b0 = {DWIDTH{1'b0}};
+    assign d0_b0 = {DWIDTH{1'b0}};
     
     reg r_valid;
     wire [DWIDTH-1:0] mem_data;
@@ -213,6 +213,7 @@ module DataMover
         .o_result(write_result_1),
         .o_valid(write_valid_1)
     );
+
     
     wire result_valid = write_valid_0 & write_valid_1;
     wire [(4*IN_DATA_WIDTH)-1:0] result_value = {write_result_1, write_result_0};
@@ -220,6 +221,6 @@ module DataMover
     assign addr_b1 = addr_cnt_write;
     assign ce_b1 = result_valid;
     assign we_b1 = result_valid;
-    assign d_b1 = result_value;
+    assign d0_b1 = result_value;
    
 endmodule

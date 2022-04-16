@@ -48,15 +48,15 @@ module Mul_Core
     
     always@(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            r_result <= {(2*IN_DATA_WIDTH){1'b0}};
+            read_result <= {(2*IN_DATA_WIDTH){1'b0}};
         end else begin
-            r_result <= write_result;
+            read_result <= write_result;
         end
     end
     
     assign o_valid = r_valid;
     assign write_result = i_a * i_b;
-    assign o_result = r_result;
+    assign o_result = read_result;
     
     
 endmodule

@@ -31,7 +31,7 @@ module Bram1(
     ce1,
     we1,
     q1,
-    d1,
+    d1
     );
     
     parameter DWIDTH = 16;
