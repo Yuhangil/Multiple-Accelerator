@@ -153,7 +153,7 @@ module DataMover
             addr_cnt_write <= 0;
         end else if(is_write_done) begin
             addr_cnt_write <= 0;
-        end else if(o_write) begin
+        end else if(o_write && we_b1) begin
             addr_cnt_write <= addr_cnt_write + 1;
         end
     end

@@ -35,8 +35,8 @@ module Mul_Core
 );
 
     reg r_valid;
-    reg [(2*IN_DATA_WIDTH)-1:0] read_result;
-    wire [(2*IN_DATA_WIDTH)-1:0] write_result;
+    reg [(2*IN_DATA_WIDTH)-1:0] r_result;
+    wire [(2*IN_DATA_WIDTH)-1:0] w_result;
     
     always@(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
@@ -48,15 +48,15 @@ module Mul_Core
     
     always@(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            read_result <= {(2*IN_DATA_WIDTH){1'b0}};
+            r_result <= {(2*IN_DATA_WIDTH){1'b0}};
         end else begin
-            read_result <= write_result;
+            r_result <= w_result;
         end
     end
     
     assign o_valid = r_valid;
-    assign write_result = i_a * i_b;
-    assign o_result = read_result;
+    assign w_result = i_a * i_b;
+    assign o_result = r_result;
     
     
 endmodule
