@@ -23,7 +23,7 @@
 	(
 		// Users to add ports here
         output o_run,
-        output [CNT-1:0] i_idle,
+        output [CNT-1:0] o_num_cnt,
         input i_idle,
         input i_running,
         input i_done,
